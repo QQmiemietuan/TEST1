@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/index.css">
+    <link type="image/x-icon" rel="icon" href="/image/logo.png">
+    <title>聯絡我們TPI東培工業</title>
+    
+   
+</head>
+<body>
+    <div class="container"  style="width: 1000px;text-align: center;">
+        <div class="header-page"></div>
+        <div class="header2-page"></div>
+        <div class="nav-page"></div>
+        <div class="line3-page"></div><br>
+       
+        <div class="system clearfix">
+            <div  style="display: flex; width: 850;">
+                <div style="margin: 0px;padding: 15px; text-align: left;width: 150px;">
+                    <p style="color: rgb(109, 99, 99); font-size:13px;margin: 0px;">技術服務</p>
+                    <p style="color: rgb(109, 99, 99); font-size:13px;margin: 0px;">詹博善 先生</p>
+                    <p style="color: rgb(109, 99, 99); font-size:13px;margin: 0px;">+886 3 3613151 #456</p>
+                    <a href="7470@tpi.tw" style="color:rgb(66, 195, 255); font-size:13px;text-decoration: none;margin: 0px;">7470@tpi.tw</a>
+                </div>
+                <div>
+                    <div style="display: flex; width: 850;padding-bottom: 10px;">
+                        <p style=" color: red;font-size:1.5em;margin: 0;padding: 0; width:20px;">●</p>
+                        <p style="margin:0;margin-right:10px;">公司名稱</p>
+                        <input type="text"style="outline:none;border:none; border-bottom:2px dashed rgb(109, 99, 99);width:200px;">
+                        <p style=" color: red;font-size:1.5em;margin: 0;padding: 0; width:20px;padding-left: 30px;">●</p>
+                        <p style="margin:0;margin-right:10px;">姓名</p>
+                        <input type="text"style="outline:none;border:none; border-bottom:2px dashed rgb(109, 99, 99);width:200px;">
+                    </div>
+                    <div style="display: flex; width: 850;padding-bottom: 10px;">
+                        <p style=" color: red;font-size:1.5em;margin: 0;padding: 0; width:20px;">●</p>
+                        <p style="margin:0;margin-right:10px;">電話</p>
+                        <input type="text"style="outline:none;border:none; border-bottom:2px dashed rgb(109, 99, 99);width:50px">
+                        <p style="margin:5px;">-</p>
+                        <input type="text"style="outline:none;border:none; border-bottom:2px dashed rgb(109, 99, 99);">
+                    </div>
+                    <div style="display: flex; width: 850;padding-bottom: 10px;">
+                        <p style=" color: red;font-size:1.5em;margin: 0;padding: 0; width:20px;">●</p>
+                        <p style="margin:0;margin-right:10px;">電子信箱</p>
+                        <input type="text"style="outline:none;border:none; border-bottom:2px dashed rgb(109, 99, 99);width:700px">
+                    </div>
+                    <div style="display: flex; width: 850;padding-bottom: 10px;">
+                        <p style=" color: red;font-size:1.5em;margin: 0;padding: 0; width:20px;">●</p>
+                        <p style="margin:0;margin-right:10px;">信息內容</p>
+                        <input type="text"style="outline:none;border:none; border-bottom:2px dashed rgb(109, 99, 99);width:700px;height: 100px;">
+                    </div>
+                    <div style="display: flex; width: 850;padding-bottom: 10px;">
+                        <p style=" color: red;font-size:1.5em;margin: 0;padding: 0; width:20px;">●</p>
+                        <p style="margin:0;margin-right:10px;">驗證碼</p>
+                        <input type="text"style="outline:none;border:none; border-bottom:2px dashed rgb(109, 99, 99)">
+                        <a href="#" id="changeImg">
+                            <canvas class="show-captcha" id="canvas" width="150" height="40"></canvas>
+                        </a>
+                        <script>
+                            jQuery(function($){
+    
+    /**生成一個隨機數**/
+    function randomNum(min, max) {
+        return Math.floor(Math.random() * (max - min) + min);
+    }
+    /**生成一個隨機色**/
+    function randomColor(min, max) {
+        var r = randomNum(min, max);
+        var g = randomNum(min, max);
+        var b= randomNum(min, max);
+        return "rgb(" + r + "," + g + "," + b + ")";
+    }
+    var code=drawPic();
+    document.getElementById("changeImg").onclick = function(e) {
+        e.preventDefault();
+        code=drawPic();
+    }
+    /**繪制驗證碼圖片**/
+    function drawPic() {
+        var canvas = document.getElementById("canvas");
+        var width = canvas.width;
+        var height = canvas.height;
+        //獲取該canvas的2D繪圖環境 
+        var ctx = canvas.getContext('2d'); 
+        ctx.textBaseline ='bottom';
+        /**繪制背景色**/
+        ctx.fillStyle = randomColor(180,240);
+        //顏色若太深可能導致看不清
+        ctx.fillRect(0,0,width,height);
+        /**繪制文字**/
+        var str ='ABCEFGHJKLMNPQRSTWXY123456789';
+        var code="";
+        //生成四個驗證碼
+        for(var i=1;i<=4;i++) {
+            var txt = str[randomNum(0,str.length)];
+            code=code+txt;
+            ctx.fillStyle = randomColor(50,160);
+            //隨機生成字體顏色
+            ctx.font = randomNum(15,40) +'px SimHei';
+            //隨機生成字體大小
+            var x =10 +i *25;
+            var y = randomNum(25,35);
+            var deg = randomNum(-45,45);
+            //修改坐標原點和旋轉角度
+            ctx.translate(x, y); 
+            ctx.rotate(deg * Math.PI /180); 
+            ctx.fillText(txt,0,0);
+            //恢復坐標原點和旋轉角度
+            ctx.rotate(-deg * Math.PI /180);
+            ctx.translate(-x, -y);
+        }
+        
+        /**繪制幹擾線**/
+        for(var i=0;i<3;i++) {
+            ctx.strokeStyle = randomColor(40, 180);
+            ctx.beginPath();
+            ctx.moveTo(randomNum(0,width/2), randomNum(0,height/2));
+            ctx.lineTo(randomNum(0,width/2), randomNum(0,height));
+            ctx.stroke();
+        }
+        /**繪制幹擾點**/
+        for(var i=0;i <50;i++) {
+            ctx.fillStyle = randomColor(255);
+            ctx.beginPath();
+            ctx.arc(randomNum(0, width), randomNum(0, height),1,0,2* Math.PI);
+            ctx.fill();
+        }
+        return code;
+    }
+});
+                        </script>
+                    </div>
+                    
+  
+                </div>
+               
+    
+        </div>
+        
+       
+        <div class="footer-page" style="position:relative"></div>
+    </div>
+    <script type="text/javascript"  src="/js/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.4.2/handlebars.js"></script>
+    
+    <script type="text/javascript"  src="/js/web.js"></script>
+</body>
+
+</html>
